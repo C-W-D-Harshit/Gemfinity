@@ -29,7 +29,7 @@ export default function LayoutProvider({
       <Footer />
       <div className="w-full h-20 bg-gradient-to-b from-transparent to-white fixed bottom-0 left-0 lg:hidden" />
       <Nav />
-      <ScrollToTop smooth />
+      <ScrollToTop className="flex items-center justify-center" smooth />
     </>
   );
 }
