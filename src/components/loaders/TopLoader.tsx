@@ -24,7 +24,7 @@ export default function TopLoader() {
   console.log(resolvedTheme);
   return (
     <Suspense>
-      <NextTopLoader showSpinner={false} color={"#ffffff"} />
+      <NextTopLoader showSpinner={false} color={"#2563eb"} />
     </Suspense>
   );
 }

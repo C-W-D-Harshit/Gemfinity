@@ -14,12 +14,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Jobify",
-    template: "%s | Jobify",
+    default: "GEMFINITY",
+    template: "%s | GEMFINITY",
   },
   description:
     "Discover the joy of daily home-cooked tiffins, delivered with convenience. Join us for exclusive pricing, priority access, and the freedom to cancel anytime. Elevate your daily dining experience today!",
-  metadataBase: new URL("https://www.app.jobify.store/"),
+  metadataBase: new URL("https://gemfinity.cleverdeveloper.in/"),
   alternates: {
     canonical: "/",
     languages: {
@@ -28,18 +28,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: {
-      default: "Jobify",
-      template: "%s | Jobify",
+      default: "GEMFINITY",
+      template: "%s | GEMFINITY",
     },
-    description:
-      "Discover the joy of daily home-cooked tiffins, delivered with convenience. Join us for exclusive pricing, priority access, and the freedom to cancel anytime. Elevate your daily dining experience today!",
+    description: "Dummy Website",
     images: [
       {
-        url: "https://www.app.jobify.store/logo.png",
+        url: "https://gemfinity.cleverdeveloper.in/logo.png",
       },
     ],
-    url: "https://www.app.jobify.store/",
-    siteName: "Jobify",
+    url: "https://gemfinity.cleverdeveloper.in/",
+    siteName: "GEMFINITY",
     locale: "en_US",
     type: "website",
   },
