@@ -20,8 +20,8 @@ model User {
   isVerified           Boolean       @default(false)
   passwordChangedAt    DateTime?
   passwordResetExpires DateTime?
-  passwordResetToken   String?       
-  verifyKey            String?       
+  passwordResetToken   Int?       
+  verifyKey            Int?       
   verifyKeyExpires     DateTime?
   phoneNumber          String?       @unique
   role                 Roles         @default(user)
