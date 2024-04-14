@@ -1,0 +1,148 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id                   String        @id @default(dbgenerated("gen_random_uuid()"))
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  name                 String
+  email                String        @unique
+  password             String
+  isActive             Boolean       @default(true)
+  isVerified           Boolean       @default(false)
+  passwordChangedAt    DateTime?
+  passwordResetExpires DateTime?
+  passwordResetToken   String?       
+  verifyKey            String?       
+  verifyKeyExpires     DateTime?
+  phoneNumber          String?       @unique
+  role                 Roles         @default(user)
+  authProvider         AuthProviders @default(credentials)
+  status               Status        @default(active)
+  reviews              Review[]
+  orders               Order[]
+}
+
+model Category {
+  id          String    @id @default(dbgenerated("gen_random_uuid()"))
+  name        String
+  description String?
+  products    Product[]
+}
+
+model Product {
+  id          String           @id @default(dbgenerated("gen_random_uuid()"))
+  name        String
+  description String
+  category    Category         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String
+  variants    ProductVariant[]
+  reviews     Review[]
+  images      ProductImage[]
+  isActive    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  orderItems  OrderItem[]
+}
+
+model ProductVariant {
+  id        String          @id @default(dbgenerated("gen_random_uuid()"))
+  productId String
+  product   Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  price     Float
+  stock     Int
+  options   ProductOption[]
+  images    ProductImage[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model ProductOption {
+  id        String         @id @default(dbgenerated("gen_random_uuid()"))
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  type      String // E.g., "Color", "Size", "Material"
+  value     String // E.g., "Red", "Medium", "Leather"
+  images    ProductImage[]
+}
+
+model ProductImage {
+  id        String          @id @default(dbgenerated("gen_random_uuid()"))
+  product   Product?        @relation(fields: [productId], references: [id])
+  productId String?
+  variant   ProductVariant? @relation(fields: [variantId], references: [id])
+  variantId String?
+  option    ProductOption?  @relation(fields: [optionId], references: [id])
+  optionId  String?
+  imageUrl  String
+  altText   String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model Review {
+  id        String   @id @default(dbgenerated("gen_random_uuid()"))
+  content   String
+  rating    Int // 1 to 5
+  author    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id         String      @id @default(dbgenerated("gen_random_uuid()"))
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+  total      Float
+  status     OrderStatus
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(dbgenerated("gen_random_uuid()"))
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum OrderStatus {
+  pending
+  shipped
+  delivered
+  cancelled
+}
+
+enum AuthProviders {
+  google
+  credentials
+  apple
+  facebook
+}
+
+enum Roles {
+  user
+  admin
+}
+
+enum Status {
+  active
+  blocked
+}
