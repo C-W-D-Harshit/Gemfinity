@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -18,6 +18,12 @@ export default function SearchComp() {
   const path = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  useEffect(() => {
+    const query = searchParams.get("q");
+    setQ(query || "");
+    return () => {};
+  }, [searchParams]);
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -50,7 +56,11 @@ export default function SearchComp() {
       </PopoverTrigger>
       <PopoverContent>
         <form className="w-full" onSubmit={handleSubmit}>
-          <Input placeholder="Search" onChange={(e) => setQ(e.target.value)} />
+          <Input
+            placeholder="Search"
+            onChange={(e) => setQ(e.target.value)}
+            value={q}
+          />
         </form>
       </PopoverContent>
     </Popover>
