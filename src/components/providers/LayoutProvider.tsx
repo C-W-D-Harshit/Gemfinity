@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import ScrollToTop from "react-scroll-to-top";
 import VerifyBar from "../layout/VerifyBar";
+import Footer from "../layout/Footer";
 
 export default function LayoutProvider({
   children,
@@ -24,7 +25,8 @@ export default function LayoutProvider({
     <>
       {/* {session?.user.verified === false && <VerifyBar session={session} />} */}
       <Header />
-      <div className="">{children}</div>
+      <div className="min-h-[calc(100vh-5rem)]">{children}</div>
+      <Footer />
       <div className="w-full h-20 bg-gradient-to-b from-transparent to-white fixed bottom-0 left-0 lg:hidden" />
       <Nav />
       <ScrollToTop smooth />
