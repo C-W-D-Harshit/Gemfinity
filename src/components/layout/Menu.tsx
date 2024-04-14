@@ -41,13 +41,13 @@ export default function Menu() {
               href={item.href}
               key={index}
               className={cn(
-                "hover:text-primary transition-all relative group",
+                "hover:text-primary transition-all relative group min-w-max",
                 {
                   "text-primary": path === "/",
                 }
               )}
             >
-              <p className="font-medium">{item.label}</p>
+              <p className="font-medium min-w-fit w-fit">{item.label}</p>
               <div
                 className={cn(
                   "h-0.5 rounded w-0 bg-primary group-hover:bg-primary group-hover:w-full transition-all duration-700 mt-0.5",

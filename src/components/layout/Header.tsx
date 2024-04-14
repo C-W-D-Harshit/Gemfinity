@@ -20,11 +20,13 @@ import Link from "next/link";
 import { GoGear } from "react-icons/go";
 import {
   IoCartOutline,
+  IoMenuOutline,
   IoPersonOutline,
   IoSearch,
   IoSearchOutline,
 } from "react-icons/io5";
 import SearchComp from "./SearchComp";
+import Hamburger from "./Hamburger";
 
 export default function Header() {
   return (
@@ -38,16 +40,21 @@ export default function Header() {
               </h1>
             </Link>
             <Menu />
-            <div className="flex items-center gap-0.5">
+            <div className="flex items-center gap-1 text-2xl">
               <SearchComp />
-              <Button size={"icon"} variant={"ghost"}>
+              <Button
+                size={"icon"}
+                variant={"ghost"}
+                className="hidden lg:flex"
+              >
                 <Link
                   href={"/cart"}
-                  className="  hover:text-primary transition-all text-xl font-bold"
+                  className="  hover:text-primary transition-all text-2xl"
                 >
                   <IoCartOutline />
                 </Link>
               </Button>
+              <Hamburger />
 
               <UserAvatar />
             </div>

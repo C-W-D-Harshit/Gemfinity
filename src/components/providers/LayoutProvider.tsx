@@ -25,8 +25,8 @@ export default function LayoutProvider({
       {/* {session?.user.verified === false && <VerifyBar session={session} />} */}
       <Header />
       <div className="">{children}</div>
-      {/* <div className="w-full h-20 bg-gradient-to-b from-transparent to-white fixed bottom-0 left-0" /> */}
-      {/* <Nav /> */}
+      <div className="w-full h-20 bg-gradient-to-b from-transparent to-white fixed bottom-0 left-0 lg:hidden" />
+      <Nav />
       <ScrollToTop smooth />
     </>
   );

@@ -47,9 +47,12 @@ export default function SearchComp() {
         <Button
           size={"icon"}
           variant={"ghost"}
-          className={cn("hover:text-primary transition-all text-xl font-bold", {
-            "bg-accent text-primary": open,
-          })}
+          className={cn(
+            "hover:text-primary transition-all text-2xl hidden lg:flex",
+            {
+              "bg-accent text-primary": open,
+            }
+          )}
         >
           <IoSearchOutline />
         </Button>
