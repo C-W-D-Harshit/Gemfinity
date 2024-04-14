@@ -34,7 +34,7 @@ export default function AdsComponent(props: AdsCompProps) {
       >
         {props.ads.map((ad) => (
           <div
-            className="relative w-full h-[30vh] md:h-[35vh] lg:h-[45vh] xl:h-[50vh] 2xl:h-[60vh] bg-red-200"
+            className="relative w-full h-[30vh] md:h-[35vh] lg:h-[45vh] xl:h-[50vh] 2xl:h-[60vh]"
             key={ad.id}
           >
             <Image
